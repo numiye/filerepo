@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="f51522d5-4d6a-4ccb-89ac-39780b00df39" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="73702d91-9859-4035-8fac-ff2379b00e2d" />
+	<flow name="fileconnectFlow" doc:id="73084e95-19c3-498c-925c-20bceffafff4" >
+		<http:listener doc:name="Listener" doc:id="f1b64ab0-b6c7-4f65-b48c-70a081866ffe" config-ref="HTTP_Listener_config" path="/fileconnect"/>
+		<file:list doc:name="List" doc:id="19dd66bf-6ffa-4a03-9bcc-657c39e9b35e" directoryPath="C:\Users\nuham\OneDrive\Desktop\doc for example" config-ref="File_Config"/>
+		<logger level="INFO" doc:name="Logger" doc:id="f3eda460-0d2d-4187-8e51-7a509f7884ca" message="payload"/>
+	</flow>
+	<flow name="fileconnectFlow1" doc:id="cbd36150-3658-4147-a1a1-b428de770c8c" >
+		<http:listener doc:name="Listener" doc:id="3e4a3402-bfa3-498c-866e-17da8b406456" config-ref="HTTP_Listener_config" path="/credirc"/>
+		<file:create-directory doc:name="Create directory" doc:id="0e902e7a-4d44-4313-af1e-3a01332e8133" directoryPath="C:\Users\nuham\OneDrive\Desktop\new102"/>
+	</flow>
+</mule>
